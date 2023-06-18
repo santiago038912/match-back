@@ -1,2 +1,6 @@
 from pymongo import MongoClient
-conn = MongoClient()
+
+client = MongoClient(host="mongodb://localhost:27017")
+
+db = client['match']
+collection = db['users']

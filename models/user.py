@@ -1,4 +1,5 @@
 from pydantic import BaseModel, Field
+from bson.objectid import ObjectId
 from typing import Optional
 
 users_db = [
@@ -21,7 +22,7 @@ users_db = [
 ]
 
 class User(BaseModel):
-    id: Optional[str] = None
+    # id: Optional[str] = None
     name: Optional[str] = Field()
     last_name: Optional[str] = Field()
     email: Optional[str] = Field()
