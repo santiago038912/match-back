@@ -1,12 +1,12 @@
 from fastapi import APIRouter, Path
 
-from fastapi.responses import JSONResponse, Response
+from fastapi.responses import JSONResponse
 
 from fastapi.exceptions import HTTPException
 
 from fastapi.encoders import jsonable_encoder
 
-from models.user import User, users_db
+from models.user import User
 
 from schemas.users import users_serializer, user_serializer
 
@@ -15,8 +15,6 @@ from typing import List
 from config.db import collection
 
 from bson import ObjectId
-
-import uuid
 
 user_router = APIRouter()
 

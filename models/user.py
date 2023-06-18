@@ -2,25 +2,6 @@ from pydantic import BaseModel, Field
 from bson.objectid import ObjectId
 from typing import Optional
 
-users_db = [
-    {
-        "id": "w765r4erfghgre",
-        "name": "Pedro",
-        "last_name": "Picapiedra",
-        "email": "pedro@gmail.com",
-        "phone_number": "2343565",
-        "password": "peofeo",
-    },
-    {
-        "id": "5678iyhgb4-4tgfevc-3fed",
-        "name": "Pedro",
-        "last_name": "Cualquiera",
-        "email": "pedro2@gmail.com",
-        "phone_number": "2343565",
-        "password": "peofeo",
-    }
-]
-
 class User(BaseModel):
     # id: Optional[str] = None
     name: Optional[str] = Field()
