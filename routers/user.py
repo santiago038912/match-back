@@ -6,7 +6,7 @@ from fastapi.exceptions import HTTPException
 
 from fastapi.encoders import jsonable_encoder
 
-from models.user import User
+from models.user import User, UserUpdate
 
 from schemas.users import users_serializer, user_serializer
 
@@ -40,18 +40,18 @@ async def create_user(user: User):
         }), status_code=201)
 
 @user_router.put('/users/{id}', tags=['users'])
-async def update_user_by_id(id: str, user: User):
+async def update_user_by_id(id: str, user: UserUpdate):
     old_user = users_serializer(collection.find({"_id": ObjectId(id)}))
     if old_user == []:
         raise HTTPException(status_code=404, detail="User not found")
     
     collection.find_one_and_update({"_id": ObjectId(id)}, {
-        "$set": dict(user)
+        "$set": dict(user.dict(exclude_unset=True))
     })
 
     return JSONResponse(content=jsonable_encoder({
-        "message": "user registered succesfullly",
-        "data": user
+        "message": "user updated succesfullly",
+        "data": user.dict(exclude_unset=True)
         }), status_code=201)
 
 @user_router.delete('/users/{id}', tags=['users'], status_code=204)
@@ -61,4 +61,4 @@ async def delete_user_by_id(id: str):
         raise HTTPException(status_code=404, detail="User not found")
 
     collection.find_one_and_delete({"_id": ObjectId(id)})
-    return {"message": "user deleted successfully"}
+    return None
